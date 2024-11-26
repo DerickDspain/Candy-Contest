@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VEA M&M Candy Contest Rules</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #4CAF50;
+    }
+    .rules {
+      text-align: left;
+      margin: 20px 0;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>VEA M&M Candy Contest</h1>
+    <p><strong>How many M&M's are in the candy jar?</strong></p>
+    <div class="rules">
+      <h3>Rules:</h3>
+      <ul>
+        <li>One entry per ED/Med Surg/ICU Staff Employee (NOT Physicians).</li>
+        <li>Entries must be completed by <strong>5pm Monday, December 9th</strong>.</li>
+        <li>Winners will be announced at the Holiday Party on <strong>Friday, December 13th</strong>.</li>
+      </ul>
+    </div>
+    <button onclick="goToForm()">I Agree to the Rules</button>
+  </div>
+
+  <script>
+    function goToForm() {
+      window.location.href = "contest-form.html";
+    }
+  </script>
+</body>
+</html>
