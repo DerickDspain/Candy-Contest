@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VEA M&M Candy Contest</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #4CAF50;
+    }
+    .rules, .form-container {
+      margin: 20px 0;
+    }
+    .form-container {
+      display: none; /* Hidden initially */
+    }
+    form {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>VEA M&M Candy Contest</h1>
+    <p><strong>How many M&M's are in the candy jar?</strong></p>
+
+    <!-- Rules Section -->
+    <div class="rules">
+      <h3>Rules:</h3>
+      <ul>
+        <li>One entry per ED/Med Surg/ICU Staff Employee (NOT Physicians).</li>
+        <li>Entries must be completed by <strong>5pm Monday, December 9th</strong>.</li>
+        <li>Winners will be announced at the Holiday Party on <strong>Friday, December 13th</strong>.</li>
+      </ul>
+      <button onclick="showForm()">I Agree to the Rules</button>
+    </div>
+
+    <!-- Contest Form -->
+    <div class="form-container" id="formContainer">
+      <form id="candyContestForm" onsubmit="submitForm(); return false;">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="number" id="red" placeholder="Red M&Ms" required>
+        <input type="number" id="green" placeholder="Green M&Ms" required>
+        <input type="number" id="white" placeholder="White M&Ms" required>
+        <input type="number" id="total" placeholder="Total M&Ms" required>
+        <button type="submit">Submit Your Guess</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Function to display the form after confirming rules
+    function showForm() {
+      document.querySelector('.rules').style.display = 'none'; // Hide rules
+      document.getElementById('formContainer').style.display = 'block'; // Show form
+    }
+
+    // Function to handle form submission
+    function submitForm() {
+      const name = document.getElementById("name").value;
+      const red = parseInt(document.getElementById("red").value);
+      const green = parseInt(document.getElementById("green").value);
+      const white = parseInt(document.getElementById("white").value);
+      const total = parseInt(document.getElementById("total").value);
+
+      if (!name || isNaN(red) || isNaN(green) || isNaN(white) || isNaN(total)) {
+        alert("Please fill out all fields correctly.");
+        return;
+      }
+
+      const data = {
+        Name: name,
+        Red: red,
+        Green: green,
+        White: white,
+        Total: total,
+      };
+
+      fetch("YOUR_OUTSYSTEMS_API_URL", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (response.ok) {
+            alert("Thank you for participating!");
+            document.getElementById("candyContestForm").reset();
+          } else {
+            alert("There was an error submitting your response.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("There was an error connecting to the server.");
+        });
+    }
+  </script>
+</body>
+</html>
